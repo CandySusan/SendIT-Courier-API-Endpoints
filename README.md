@@ -10,7 +10,7 @@ SendIT Courier Api endpoints implements non-persistent data storage using data s
 
 #Project
 ********************************************************
-To run the project Locally, clone []
+To run the project Locally, clone [https://github.com/CandySusan/SendIT-Courier-API-Endpoints.git]
 
 . cd into the folder that contains the cloned project.
 . create a virtual environment.
