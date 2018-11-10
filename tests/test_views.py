@@ -15,7 +15,7 @@ class TestApi(unittest.TestCase):
         self.hostname = "/api/v1/"
         self.parcels = {
 
-             "OrderNumber": 7,
+            "OrderNumber": 7,
             "PickUp_Location": "ntinda",
             "Destination": "entebbe",
             "Price": 23000,

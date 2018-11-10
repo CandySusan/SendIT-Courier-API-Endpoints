@@ -92,13 +92,16 @@ def Welcome():
     # elif len(password) < 8:
     #     return jsonify({'message': 'Password must be at least 8 characters.'}), 400
 
-#  Create parcel delivery order
+#  Create parcel delivery order,
 
 @app.route('/api/v1/parcels', methods=["POST"])
 def create_parcel_delivery_order():
-    parcel = Order(PickUp_Location="PickUp_Location", Destination="Destination",Price="Price",Status="Status",
-    PaymentMode="PaymentMode", No_Of_Deliveries="No_Of_Deliveries",Date="Date", ParcelId="ParcelId")           
-    parcel.add_parcel_delivery_order(parcel)
+    data = request.get_json()
+    print(data)
+    print(data['OrderNumber'])
+    print(data['Destination'])
+    parcel = Order(data['OrderNumber'], data['Destination'], data['Price'],  data['Status'], data['PaymentMode'], data['No_Of_Deliveries'], data['PaymentMode'], data['quantity'], data['parcelId'], data['date'])
+    print(parcel)
     return jsonify({"message": "successfully added parcel with id"}), 201
 
 
