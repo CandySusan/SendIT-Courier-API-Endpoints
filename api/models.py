@@ -1,13 +1,13 @@
 
 import random
-import datetime
+
 
 parcel_inventory = []
 
 
 
 class Order():
-    def __init__(self,PickUp_Location, Destination,Price,Status,PaymentMode, No_Of_Deliveries,Date):
+    def __init__(self,PickUp_Location, Destination,Price,Status,PaymentMode, No_Of_Deliveries,Date, ParcelId):
 
         self.PickUp_Location = PickUp_Location
         self.Destination = Destination
@@ -17,7 +17,7 @@ class Order():
         self.No_Of_Deliveries = No_Of_Deliveries
         self.OrderNumber = random.randint(0, 100)
         self.quantity = 10
-        self.parcelId = random.randint(0, 100)
+        self.parcelId = ParcelId
         self.Date = 12/20/17
 
     def add_parcel_delivery_order(self, parcelId):
@@ -47,7 +47,7 @@ class Order():
         }
 
         return parcel_json
-        
+
     @staticmethod
     def get_parcel_inventory():
         return parcel_inventory
