@@ -10,7 +10,7 @@ install:
 script:
 
 
-#  - py.test --cov=api_endpoints
+ - py.test --cov=api
 
 after_script:
  - coveralls
