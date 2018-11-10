@@ -50,51 +50,54 @@ DeliveryOrder_dict =[{
 def Welcome():
     return "Welcome to SendIT Courier"
 
-@app.route('/api/v1/login', methods=['POST'])
-def login():
-    info = request.get_json()
+# @app.route('/api/v1/login', methods=['POST'])
+# def login():
+#     info = request.get_json()
 
-    username = info.get('username')
-    password = info.get('password')
+#     username = info.get('username')
+#     password = info.get('password')
 
-    if not username or username.isspace():
-        return jsonify({
-            'message': 'Enter a valid username.'
-        }), 400
-    if not password or password.isspace():
-        return jsonify({
-            'message': 'Enter a valid password.'
-        }), 400
-
-
-@app.route('/api/v1/signup', methods=['POST'])
-def user_signup():
-    info = request.get_json()
-
-    username = info.get('username')
-    email = info.get('email')
-    password = info.get('password')
+#     if not username or username.isspace():
+#         return jsonify({
+#             'message': 'Enter a valid username.'
+#         }), 400
+#     if not password or password.isspace():
+#         return jsonify({
+#             'message': 'Enter a valid password.'
+#         }), 400
 
 
-    if not username or username.isspace():
-        return jsonify({'message': 'Username field can not be empty.'}), 400
+# @app.route('/api/v1/signup', methods=['POST'])
+# def user_signup():
+#     # info = request.get_json()
+ 
+#     username = request.form.get('username')
+#     email = request.form.get('email')
+#     password = request.form.get('password')
+    
+#     return jsonify({
+#         "message":"Username added"
+#     })
 
-    if not email or email.isspace():
-        return jsonify({'message': 'Email field can not be empty.'}), 400
-    # elif not re.match(r"[^@.]+@[A-Za-z]+\.[a-z]+", email):
-    #     return jsonify({'message': 'Enter a valid email address.'}), 400
+    # if not username or username.isspace():
+    #     return jsonify({'message': 'Username field can not be empty.'}), 400
 
-    if not password or password.isspace():
-        return jsonify({'message': 'Password field can not be left empty.'}), 400
-    elif len(password) < 8:
-        return jsonify({'message': 'Password must be at least 8 characters.'}), 400
+    # if not email or email.isspace():
+    #     return jsonify({'message': 'Email field can not be empty.'}), 400
+    # # elif not re.match(r"[^@.]+@[A-Za-z]+\.[a-z]+", email):
+    # #     return jsonify({'message': 'Enter a valid email address.'}), 400
+
+    # if not password or password.isspace():
+    #     return jsonify({'message': 'Password field can not be left empty.'}), 400
+    # elif len(password) < 8:
+    #     return jsonify({'message': 'Password must be at least 8 characters.'}), 400
 
 #  Create parcel delivery order
 
 @app.route('/api/v1/parcels', methods=["POST"])
 def create_parcel_delivery_order():
-    parcel = Order(PickUp_Location='PickUp_Location', Destination='Destination',
-    Price='Price',Status='Status',PaymentMode='PaymentMode', No_Of_Deliveries='No_Of_Deliveries',Date='Date')           
+    parcel = Order(PickUp_Location="PickUp_Location", Destination="Destination",Price="Price",Status="Status",
+    PaymentMode="PaymentMode", No_Of_Deliveries="No_Of_Deliveries",Date="Date", ParcelId="ParcelId")           
     parcel.add_parcel_delivery_order(parcel)
     return jsonify({"message": "successfully added parcel with id"}), 201
 
