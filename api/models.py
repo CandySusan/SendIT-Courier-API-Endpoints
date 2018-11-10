@@ -1,24 +1,23 @@
 
 import random
 
-
 parcel_inventory = []
 
 
 
 class Order():
-    def __init__(self,PickUp_Location, Destination,Price,Status,PaymentMode, No_Of_Deliveries,Date, ParcelId):
+    def __init__(self, *args):
 
-        self.PickUp_Location = PickUp_Location
-        self.Destination = Destination
-        self.Price = Price
-        self.Status = Status
-        self.PaymentMode = PaymentMode
-        self.No_Of_Deliveries = No_Of_Deliveries
-        self.OrderNumber = random.randint(0, 100)
-        self.quantity = 10
-        self.parcelId = ParcelId
-        self.Date = 12/20/17
+        self.PickUp_Location = args[0]
+        self.Destination = args[1]
+        self.Price = args[2]
+        self.Status = args[3]
+        self.PaymentMode = args[4]
+        self.No_Of_Deliveries = args[5]
+        self.OrderNumber = args[6]
+        self.quantity = args[7]
+        self.parcelId = args[8]
+        self.Date = args[9]
 
     def add_parcel_delivery_order(self, parcelId):
         parcel_inventory.append(parcelId)
