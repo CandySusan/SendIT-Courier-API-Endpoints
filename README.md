@@ -3,9 +3,9 @@
 
 [![Build Status](https://travis-ci.org/CandySusan/SendIT-Courier-API-Endpoints.svg?branch=develop)](https://travis-ci.org/CandySusan/SendIT-Courier-API-Endpoints)
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/5e1cc600d8edac9bbfd2/maintainability)](https://codeclimate.com/github/CandySusan/SendIT-Courier-API-Endpoints/maintainability
+[![Maintainability](https://api.codeclimate.com/v1/badges/5e1cc600d8edac9bbfd2/maintainability)]
 
-[![Test Coverage](https://api.codeclimate.com/v1/badges/5e1cc600d8edac9bbfd2/test_coverage)](https://codeclimate.com/github/CandySusan/SendIT-Courier-API-Endpoints/test_coverage)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/5e1cc600d8edac9bbfd2/test_coverage)]
 
 
 
