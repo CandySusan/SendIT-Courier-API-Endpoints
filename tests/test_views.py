@@ -34,7 +34,8 @@ class TestApi(unittest.TestCase):
                 }
                 
 
-        
+    pending_userId = []
+    generated_userId = [1,2,12.10]     
     
 
     def test_post_a_parcel(self):
@@ -122,12 +123,17 @@ class TestUsers(unittest.TestCase):
        
         self.assertEqual(response.status_code, 201)
 
-  
+    def test_userId_mising(self):
+        userId == 0
+    
+        self.assertEqual(get_user_with_specific_userId(userId),False)
+    
+    def test_userId_is_int(self):
+        userId = "str"
+        self.assertFalse(get_user_with_specific_userId(userId),False)
 
-    # def test_user_entered_wrong_password(self):
-	# 	    with self.assertRaises(ValueError):
-	# 		    signup = dict({
-    #             'username':'candy',
-    #             'eamil':'candysusan55@gmail.com',
-    #             'password':'candysusan'
-    #         })
+
+    def test_get_invalid_parcel_delivery_orders(self):
+        response= self.app_client.get(self.hostname+'parcels/0000')
+       
+        self.assertEqual(response.status_code, 204)

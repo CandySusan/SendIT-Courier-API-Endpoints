@@ -81,7 +81,7 @@ def get_specific_parcelId(parcelId):
 def get__all_parcels():
     parcel_list = []
     for parcel in parcel_inventory:
-        parcel_list.append(parcel._json())
+        parcel_list.append(parcel.to_json())
 
     return jsonify({"parcel_inventory": parcel_list}), 200
 
@@ -117,6 +117,15 @@ def add_user():
             "message":"User added successfully",
             "user":user
         }),201
+
+@app.route('/api/v1/users', methods=['GET'])
+def get_users():
+    user_list = []
+    for user in users:
+        user_list.append(user.user_json())
+
+    return jsonify({"users": user_list}), 200
+
 
 @app.route('/api/v1/users/<int:userId>', methods=['GET'])
 def get_user_with_specific_userId(userId):
