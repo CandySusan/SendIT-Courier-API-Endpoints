@@ -60,6 +60,20 @@ class TestApi(unittest.TestCase):
         result = self.client.get('/api/v1/parcels/'+str(self.parcels['parcelId']))
         self.assertEqual(result.status_code,200)
         # self.assertTrue(order.add_parcel_delivery_order(parcelId),True)
+def test_to_cancel_specific_parcel_delivery_order(self):
+    response = self.app.put('/api/v1/parcels/1')
+    self.assertEqual(response.status_code,200)
+
+def test_post_endpoint_errors_that_returns_400(self):
+      response = self.app.post ('/api/v1/parcels',
+                 data=json.dumps( {'id': 0
+                                    }
+                              ),
+                    content_type='application/json')
+                  
+      self.assertEqual(response.status_code,400)
+
+
 
     # def test_parcelId_mising(self,parcelId): 
     #     order = Order(PickUp_Location='PickUp_Location', Destination='Destination',
