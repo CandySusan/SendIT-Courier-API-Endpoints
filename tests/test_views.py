@@ -10,26 +10,39 @@ from api.views import app
 class TestApi(unittest.TestCase):
 
     def setUp(self):
-
         self.client = app.test_client()
         self.hostname = "/api/v1/"
         self.parcels = {
-
-            "OrderNumber": 7,
-            "PickUp_Location": "ntinda",
-            "Destination": "entebbe",
-            "Price": 23000,
-            "Status": "delivered",
+           "PickUp-Location":"entebbe",
+            "Destination":"Ntinda",
+            "Price":20000,
+            "Status": "Delivered",
             "PaymentMode": "cash",
-            "No_Of_Deliveries": 4,
-            "quantity": 8,
-            "parcelId":1
-        }
+            "No_Of_Deliveries":2,
+            "OrderNumber":2,
+            "quantity":4,
+            "parcelId":2,
+            "date":"12/20/16",
+            "item":[{
+              "item_name" :
+              [{"weight":10}],
+             "size":[{
+                    "lenth":10,
+                    "height":2,
+                    "width":5}]
+                    }]
+                }
+                
+
+        
     
 
     def test_post_a_parcel(self):
         response = self.client.post(
-            self.hostname+'parcels', data=json.dumps(self.parcels))
+            self.hostname+'parcels',
+            content_type='application/json', 
+            data=json.dumps(self.parcels)
+            )
 
         self.assertEqual(response.status_code, 201)
 
