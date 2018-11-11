@@ -18,6 +18,7 @@ class Order():
         self.quantity = args[7]
         self.parcelId = args[8]
         self.Date = args[9]
+        self.item  = args[10]
 
     def add_parcel_delivery_order(self, parcelId):
         parcel_inventory.append(parcelId)
@@ -41,7 +42,8 @@ class Order():
             "No_Of_Deliveries": self.No_Of_Deliveries,
             "quantity": self.quantity,
             "parcelId":self.parcelId,
-            "date":self.Date
+            "date":self.Date,
+            "item":self.item
 
         }
 
@@ -57,12 +59,6 @@ class User:
         self.username = username
         self.email = email
         self.password = password    
-
-    signup = [{
-    "username": "candy",
-    "email": "candysusan55@gmail.com",
-    "password": "golda@2020"
-
-}]  
+ 
     
     

@@ -100,7 +100,10 @@ def create_parcel_delivery_order():
     print(data)
     print(data['OrderNumber'])
     print(data['Destination'])
-    parcel = Order(data['OrderNumber'], data['Destination'], data['Price'],  data['Status'], data['PaymentMode'], data['No_Of_Deliveries'], data['PaymentMode'], data['quantity'], data['parcelId'], data['date'])
+    
+    parcel = Order(data['OrderNumber'], data['Destination'], data['Price'],  data['Status'], 
+    data['PaymentMode'], data['No_Of_Deliveries'], 
+    data['PaymentMode'], data['quantity'], data['parcelId'], data['date'],data['item'])
     print(parcel)
     return jsonify({"message": "successfully added parcel with id"}), 201
 
@@ -121,7 +124,7 @@ def get_specific_parcelId(parcelId):
 def get__all_parcels():
     parcel_list = []
     for parcel in parcel_inventory:
-        parcel_list.append(parcel.to_json())
+        parcel_list.append(parcel._json())
 
     return jsonify({"parcel_inventory": parcel_list}), 200
 
