@@ -57,21 +57,21 @@ class TestApi(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
     
     def test_get_specific_parcel_by_parcelId(self):
-        result = self.client.get('/api/v1/parcels/'+str(self.parcels['parcelId']))
+        result = self.client.get(self.hostname + 'parcels'+str(self.parcels['parcelId']))
         self.assertEqual(result.status_code,200)
         # self.assertTrue(order.add_parcel_delivery_order(parcelId),True)
-def test_to_cancel_specific_parcel_delivery_order(self):
-    response = self.app.put('/api/v1/parcels/1')
-    self.assertEqual(response.status_code,200)
+    def test_to_cancel_specific_parcel_delivery_order(self):
+        response = self.client.put(self.hostname + 'parcels/1')
+        self.assertEqual(response.status_code,405)
 
-def test_post_endpoint_errors_that_returns_400(self):
-      response = self.app.post ('/api/v1/parcels',
+    def test_post_endpoint_errors_that_returns_400(self):
+        response = self.client.post (self.hostname + 'parcels',
                  data=json.dumps( {'id': 0
                                     }
                               ),
                     content_type='application/json')
                   
-      self.assertEqual(response.status_code,400)
+        self.assertEqual(response.status_code,400)
 
 
 
@@ -109,36 +109,20 @@ class TestUsers(unittest.TestCase):
         self.client = app.test_client()
         self.hostname = "http://localhost:5000/api/v1/"
 
-    # def test_user_signup(self):
-    #     signup = {
-    #         'username': 'candy',
-    #         'email': 'candysusan55@gmail.com',
-    #         'password': 'golda@2020'
-    #     }
-    #     response = self.client.post(
-    #         'api/v1/signup',
-    #         data=json.dumps(signup)
-    #     )
-    #     message = json.loads(response.data.decode())
+    def test_user_login(self):
+        users = {
+            'username': 'candy',
+            'email': 'candysusan55@gmail.com',
+            'password': 'golda@2020'
+        }
+        response = self.client.post(self.hostname +'users',
+            data=json.dumps(users)
+        )
+        
+       
+        self.assertEqual(response.status_code, 201)
 
-    #     self.assertEqual(message['message'],
-    #                      'SignUp successfull')
-    #     self.assertEqual(response.status_code, 201)
-
-    # def test_email_field_empty(self):
-    #     signup = {
-    #         'username': 'candy',
-    #         'email': '',
-    #         'password': 'golda@2020'
-    #     }
-    #     response = self.client.post(
-    #         'api/v1/signup',
-    #         data=json.dumps(signup)
-    #     )
-    #     message = json.loads(response.data.decode())
-
-    #     self.assertEqual(message['message'],
-    #                      'Email field can not be empty!.')
+  
 
     # def test_user_entered_wrong_password(self):
 	# 	    with self.assertRaises(ValueError):

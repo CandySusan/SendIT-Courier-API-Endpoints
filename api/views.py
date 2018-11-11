@@ -5,92 +5,50 @@ from api.models import Order,  parcel_inventory
 
 app = Flask(__name__)
 
+users = [{
+    "userId": 1,
+    "username": "candy",
+    "email": "candysusan55@gmail.com",
+    "password":"golda@2020"
 
+},
+    {
+    "userId": 2,
+    "username": "picky",
+    "email": "pickykimani@gmail.com",
+    "password":"hawatuwezi"
 
+}
+]
+orders= [
+    {
+    "PickUpLocation":"Entebbe",
+	"Destination":"Ntinda",
+	"Price":20000,
+	"Status": "Delivered",
+	"PaymentMode": "cash",
+	"No_Of_Deliveries":2,
+	"OrderNumber":2,
+	"quantity":4,
+	"parcelId":2,
+	"date":"12/20/16",
+	 "item":[{
+              "item_name" :"sandals",
+              "weight":100,
+             "size":[{
+                    "lenth":10,
+                    "height":2,
+                    "width":5}]
+                    }]
+     }
+]
+
+specific_order=[]
     
-# re= [r"/^@.]+@[A-Za-z]+\.[a-z]+/"]
-
-    
-parcelId= ['1', '2', '3']
-
-DeliveryOrder_dict =[{
-	'1': {
-		'PickUp Location': "PickUp_Location",
-		'Destination': 1600,
-		'Price': 1350, 
-        'PaymentMode':"mm",
-        'DeliveryDate':12/10/18,
-        'Status':"delivered",
-        'No Of Deliveries': 3
-
-	},
-	'2': {
-		'PickUp Location': 1500,
-		'Destination': 1600,
-		'Price': 1350,
-        'PaymentMode':"mm",
-        'DeliveryDate':12/10/18,
-        'Status':"delivered",
-        'No Of Deliveries': 4
-
-	},
-    '003': {
-		'PickUp Location': 1500,
-		'Destination': 1600,
-		'Price': 1350,
-        'PaymentMode':"mm",
-        'DeliveryDate':12/10/18,
-        'Status': "delivered",
-        'No Of Deliveries': 5
-	},
-}]
-
 
 @app.route('/')
 def Welcome():
     return "Welcome to SendIT Courier"
-
-# @app.route('/api/v1/login', methods=['POST'])
-# def login():
-#     info = request.get_json()
-
-#     username = info.get('username')
-#     password = info.get('password')
-
-#     if not username or username.isspace():
-#         return jsonify({
-#             'message': 'Enter a valid username.'
-#         }), 400
-#     if not password or password.isspace():
-#         return jsonify({
-#             'message': 'Enter a valid password.'
-#         }), 400
-
-
-# @app.route('/api/v1/signup', methods=['POST'])
-# def user_signup():
-#     # info = request.get_json()
- 
-#     username = request.form.get('username')
-#     email = request.form.get('email')
-#     password = request.form.get('password')
-    
-#     return jsonify({
-#         "message":"Username added"
-#     })
-
-    # if not username or username.isspace():
-    #     return jsonify({'message': 'Username field can not be empty.'}), 400
-
-    # if not email or email.isspace():
-    #     return jsonify({'message': 'Email field can not be empty.'}), 400
-    # # elif not re.match(r"[^@.]+@[A-Za-z]+\.[a-z]+", email):
-    # #     return jsonify({'message': 'Enter a valid email address.'}), 400
-
-    # if not password or password.isspace():
-    #     return jsonify({'message': 'Password field can not be left empty.'}), 400
-    # elif len(password) < 8:
-    #     return jsonify({'message': 'Password must be at least 8 characters.'}), 400
 
 #  Create parcel delivery order,
 
@@ -100,7 +58,6 @@ def create_parcel_delivery_order():
     print(data)
     print(data['OrderNumber'])
     print(data['Destination'])
-    
     parcel = Order(data['OrderNumber'], data['Destination'], data['Price'],  data['Status'], 
     data['PaymentMode'], data['No_Of_Deliveries'], 
     data['PaymentMode'], data['quantity'], data['parcelId'], data['date'],data['item'])
@@ -128,18 +85,58 @@ def get__all_parcels():
 
     return jsonify({"parcel_inventory": parcel_list}), 200
 
+# Add users
+@app.route('/api/v1/users', methods=['POST'])
+def add_user():
+    data = request.get_json()
 
+    username = data.get("username")
 
+    email = data.get("email")
 
-#need authentication only admin can delete parcel
-@app.route('/api/v1/parcels/<int:parcelId>', methods=['DELETE'])
-def delete_parcel(parcelId):
-	del parcel_inventory
-	parcel_inventory.remove(parcelId)
+    password = data.get("password")
 
-	return jsonify({
-		'message': parcelId + ' deleted successfully'
-	}),200
+    userId = len(users)+1 
+
+    if not username or username.isspace():
+        return jsonify({
+            'message': 'Enter a valid username'
+        }), 400
+    if not password or password.isspace():
+        return jsonify({
+            'message': 'Enter a valid password'
+        }), 400
+    user = dict(
+        username = username,
+        email    = email,
+        password = password
+        )
+    users.append(user)
+
+    return jsonify({
+            "message":"User added successfully",
+            "user":user
+        }),201
+
+@app.route('/api/v1/users/<int:userId>', methods=['GET'])
+def get_user_with_specific_userId(userId):
+    return next((item for item in orders
+        if item(userId) == userId),False)
+
+    if not userId or userId < 1:
+        return jsonify({
+            "message": "oops userId required and canot be less than one"
+        }), 400
+
+    for user in users:  # checking for a specific book
+        if user["userId"] == userId:
+            return jsonify({
+                "user": user
+            }), 200
+
+    return jsonify({
+        "message": " not found"
+    }), 204   
 
 
    
