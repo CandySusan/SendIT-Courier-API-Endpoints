@@ -12,14 +12,14 @@ SendIT Courier Api endpoints implements non-persistent data storage using data s
 
 # Project
 ********************************************************
-To run the project Locally, clone ~https://github.com/CandySusan/SendIT-Courier-API-Endpoints.git~
+To run the project Locally, clone [https://github.com/CandySusan/SendIT-Courier-API-Endpoints.git]
 
-. cd into the folder that contains the cloned project.
-. create a virtual environment.
-. activate the virtual environment.
-. pip install the requirements.txt.
-. to run the project use python3. the run command is [python run.py].
-. To access and use the application's endpoints on Postman, Use the following URL []
+- cd into the folder that contains the cloned project.
+- create a virtual environment.
+- activate the virtual environment.
+- pip install the requirements.txt.
+- to run the project use python3. the run command is [python run.py].
+- To access and use the application's endpoints on Postman, Use the following URL []
 
 # Application Features
 
@@ -27,10 +27,14 @@ To run the project Locally, clone ~https://github.com/CandySusan/SendIT-Courier-
 |   EndPoint                     | Function        
 | -------------                  |:-------------:
 | GET /parcels                   |Fetch all parcel delivery orders 
+
 | GET /parcels/<parcelId>        |Create a parcel delivery order  
-| GET /users/<userId>/parcels    |Fetch all parcel delivery orders by a specific user    
-  PUT /parcels/<parcelId>/cancel |Cancel the specific parcel delivery order             POST /parcels                  |Create parcel delivery order 
-                    
+
+| GET /users/<userId>/parcels    |Fetch all parcel delivery orders by a specific user
+
+  PUT /parcels/<parcelId>/cancel |Cancel the specific parcel delivery order  
+
+  POST /parcels                  |Create parcel delivery order
                 
       
 
