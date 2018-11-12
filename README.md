@@ -27,13 +27,9 @@ To run the project Locally, clone [https://github.com/CandySusan/SendIT-Courier-
 |   EndPoint                     | Function        
 | -------------                  |:-------------:
 | GET /parcels                   |Fetch all parcel delivery orders 
-
 | GET /parcels/<parcelId>        |Create a parcel delivery order  
-
 | GET /users/<userId>/parcels    |Fetch all parcel delivery orders by a specific user
-
   PUT /parcels/<parcelId>/cancel |Cancel the specific parcel delivery order  
-
   POST /parcels                  |Create parcel delivery order
                 
       
