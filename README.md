@@ -1,8 +1,5 @@
 [![Coverage Status](https://coveralls.io/repos/github/CandySusan/SendIT-Courier-API-Endpoints/badge.svg?branch=develop)](https://coveralls.io/github/CandySusan/SendIT-Courier-API-Endpoints?branch=develop)
-
-
 [![Build Status](https://travis-ci.org/CandySusan/SendIT-Courier-API-Endpoints.svg?branch=develop)](https://travis-ci.org/CandySusan/SendIT-Courier-API-Endpoints)
-
 ![Maintainability](https://api.codeclimate.com/v1/badges/5e1cc600d8edac9bbfd2/maintainability)
 
 
@@ -27,13 +24,14 @@ To run the project Locally, clone ~https://github.com/CandySusan/SendIT-Courier-
 # Application Features
 
 	                      
-|   EndPoint                    | Function        
-| -------------                 |:-------------:
-| GET /parcels                  | Fetch all parcel delivery orders 
-| GET /parcels/<parcelId>        Fetch a specific parcel delivery order  
-| GET /users/<userId>/parcels    Fetch all parcel delivery orders by a specific user
-  PUT /parcels/<parcelId>/cancel Cancel the specific parcel delivery order
-  POST /parcels                  Create a parcel delivery order
+|   EndPoint                     | Function        
+| -------------                  |:-------------:
+| GET /parcels                   |Fetch all parcel delivery orders 
+| GET /parcels/<parcelId>        |Create a parcel delivery order  
+| GET /users/<userId>/parcels    |Fetch all parcel delivery orders by a specific user    
+  PUT /parcels/<parcelId>/cancel |Cancel the specific parcel delivery order             POST /parcels                  |Create parcel delivery order 
+                    
+                
       
 
 # Installation & Requirements;
