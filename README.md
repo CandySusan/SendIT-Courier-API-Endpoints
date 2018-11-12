@@ -3,9 +3,6 @@
 ![Maintainability](https://api.codeclimate.com/v1/badges/5e1cc600d8edac9bbfd2/maintainability)
 
 
-
-
-
 # SendIT Courier API Endpoints
 
 SendIT Courier Api endpoints implements non-persistent data storage using data structures
@@ -24,17 +21,17 @@ To run the project Locally, clone [https://github.com/CandySusan/SendIT-Courier-
 # Application Features
 
 	                      
-|   EndPoint                     | Function        
-| -------------                  |:-------------:
-| GET /parcels                   |Fetch all parcel delivery orders 
-| GET /parcels/<parcelId>        |Create a parcel delivery order  
-| GET /users/<userId>/parcels    |Fetch all parcel delivery orders by a specific user
-  PUT /parcels/<parcelId>/cancel |Cancel the specific parcel delivery order  
-  POST /parcels                  |Create parcel delivery order
+|   EndPoint                        | Function        
+| -------------                     |:-------------:
+| GET /parcels                      |Fetch all parcel delivery orders 
+| GET /parcels/parcelId             |Create a parcel delivery order  
+| GET /users/userId/parcels         |Fetch all parcel delivery orders by a specific user
+  PUT /parcels/parcelId/cancel      |Cancel the specific parcel delivery order  
+  POST /parcels                     |Create parcel delivery order
                 
       
 
-# Installation & Requirements;
+# Installation & Requirements
 
 - Python
 
