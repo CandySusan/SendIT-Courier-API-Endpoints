@@ -31,7 +31,7 @@ class Order():
 
         return  parcel_inventory
 
-    def to_json(self):
+    def parcel(self):
 
         parcel_json = {
             "OrderNumber": self.OrderNumber,

@@ -71,7 +71,7 @@ def create_parcel_delivery_order():
 def get_specific_parcelId(parcelId):
     for parcel in parcel_inventory:
         if parcel.parcelId ==  parcelId:
-            return jsonify(parcel.to_json())
+            return jsonify(parcel.parcel())
 
     return jsonify({"message": "oopsy parcel not found"}), 200
 
@@ -82,7 +82,7 @@ def get_specific_parcelId(parcelId):
 def get__all_parcels():
     parcel_list = []
     for parcel in parcel_inventory:
-        parcel_list.append(parcel.to_json())
+        parcel_list.append(parcel.parcel())
 
     return jsonify({"parcel_inventory": parcel_list}), 200
 
