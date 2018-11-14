@@ -80,10 +80,10 @@ def get__all_parcels():
 
 # GET specific parcel by id
 @app.route('/api/v1/parcels/<int:parcelId>', methods=["GET"])
-def get_specific_parcelId(self,parcelId):
-    parcelId=controller.get_parcel_by_parcelId(self)
+def get_specific_parcelId(parcelId):
+    parcel=controller.get_parcel_by_parcelId(parcelId)
 
-    return jsonify(parcelId), 200
+    return jsonify(parcel), 200
 
 
 
