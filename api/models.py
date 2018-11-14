@@ -2,7 +2,7 @@
 import random
 
 parcel_inventory = {"parcels":[]}
-users = []
+user_list = {"users":[]}
 
 
 
@@ -28,23 +28,5 @@ class User:
         self.password = password    
  
     
-    def add_user(self, user):
-        users.append(user)
-
-        return users
-
-    def user_json(self):
-
-        user_json = {
-        "userId"   :self.userId,
-        "username" :self.username,
-        "email"    :self.email,
-        "password" :self.password 
-
-        }
-
-        return user_json
-
-    @staticmethod
-    def get_users():
-        return users
+   
+    
