@@ -2,7 +2,7 @@
 import random
 
 parcel_inventory = {"parcels":[]}
-users = []
+user_list = {"users":[]}
 
 
 
@@ -28,23 +28,36 @@ class User:
         self.password = password    
  
     
-    def add_user(self, user):
-        users.append(user)
+   
+    
+class Validator:
 
-        return users
+    def auto_id(_list):
+        global id
+        if len(_list) == 0:
+            id = len(_list) + 1
+        else:
+            id = id + 1
+        return id
 
-    def user_json(self):
+    def is_empty(item_list):
+        if len(item_list) == 0:
+            return True
+        return False
 
-        user_json = {
-        "userId"   :self.userId,
-        "username" :self.username,
-        "email"    :self.email,
-        "password" :self.password 
+    def doesnot_exist(item):
+        if not item or len(item) == 0:
+            return jsonify({
+                'message': 'Sorry! Item should at least have three characters'
+            }), 400
 
-        }
+    def is_not_integer(item):
+        if type(item) == int:
+            return jsonify({
+                'message': 'Sorry item should be an integer'
+            }), 400
 
-        return user_json
-
-    @staticmethod
-    def get_users():
-        return users
+    def is_negative(item):
+        if item in item_list:
+            if item['item_id'] != item['item_id']:
+                item_list.append(item)

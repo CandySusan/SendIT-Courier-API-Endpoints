@@ -13,7 +13,7 @@ class Controller:
             "sender_contact":order.sender_contact,
             "receiver":order.receiver,
             "receiver_contact":order.receiver_contact,
-            "weight":order.weight,
+            "weight":order.weight,~
             "parcelId":order.parcelId,
             "userId":order.userId
         }
