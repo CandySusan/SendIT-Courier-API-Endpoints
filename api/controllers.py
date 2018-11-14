@@ -1,6 +1,6 @@
 
 from api.models import parcel_inventory
-
+from api.models import user_list
 
 class Controller:
 
@@ -13,9 +13,10 @@ class Controller:
             "sender_contact":order.sender_contact,
             "receiver":order.receiver,
             "receiver_contact":order.receiver_contact,
-            "weight":order.weight,~
+            "weight":order.weight,
             "parcelId":order.parcelId,
-            "userId":order.userId
+            "userId":order.userId,
+            "status":order.status
         }
         
         parcel_inventory.get("parcels").append(parcel)
@@ -28,7 +29,7 @@ class Controller:
         return  parcel_inventory
 
     def get_parcel_by_parcelId(self,parcelId):
-        for parcel in parcel_inventory.get("parcels"):# get access to list of parcels using the key
+        for parcel in parcel_inventory.get("parcels"):
             if parcel.get("parcelId") == parcelId:
                 return parcel
 
@@ -36,3 +37,32 @@ class Controller:
 
     def get_parcel_inventory(self):
         return parcel_inventory
+
+class User_controller:
+
+    def add_user(self, user):
+        new_user = {
+            "userId":user.userId,
+            "username":user.username,
+            "email":user.email,
+            "password":user.password,
+          
+        }
+        
+        user_list.get("users").append(new_user)
+
+        return user_list
+    
+    def delete_user(self,userId):
+        user_list.remove(userId)
+
+        return  user_list
+
+    def get_user_by_userId(self,userId):
+        for user in user_list.get("users"):
+            if user.get("userId") == userId:
+                return user
+           
+
+    def get_users(self):
+        return user_list

@@ -19,7 +19,7 @@ class Order():
         self.weight = args.get("weight")
         self.parcelId = args.get("parcelId")
         self.userId = args.get("userId")
-
+        self.status = args.get("status")
 class User:
     def __init__(self, userId, username, password, email):
         self.userId = userId
