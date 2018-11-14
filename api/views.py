@@ -2,9 +2,10 @@ from flask import Flask, jsonify, request, Response
 import json
   
 from api.models import Order,  parcel_inventory
-
+from api.controllers import Controller
 app = Flask(__name__)
 
+controller = Controller()
 users = [{
     "userId": 1,
     "username": "candy",
@@ -23,25 +24,17 @@ users = [{
 
 orders= [
     {
-    "PickUpLocation":"Entebbe",
+    "Date":"12/10/17",
+    "PickUp_Location":"Entebbe",
 	"Destination":"Ntinda",
-	"Price":20000,
-	"Status": "Delivered",
-	"PaymentMode": "cash",
-	"No_Of_Deliveries":2,
-	"OrderNumber":2,
-	"quantity":4,
-	"parcelId":2,
-	"date":"12/20/16",
-	 "item":[{
-              "item_name" :"sandals",
-              "weight":100,
-             "size":[{
-                    "lenth":10,
-                    "height":2,
-                    "width":5}]
-                    }]
-     }
+	"Sender":"Ziggy",
+	"Sender_Contact":"07721234567",
+    "Receiver":"07721234567",
+    "Receiver_Contact":"07721234567",
+    "Weight":"weight",
+    "ParcelId":2,
+    "UserId":1
+    }	
 ]
 
 specific_order=[]
@@ -56,35 +49,44 @@ def Welcome():
 @app.route('/api/v1/parcels', methods=["POST"])
 def create_parcel_delivery_order():
     data = request.get_json()
-    print(data)
-    print(data['OrderNumber'])
-    print(data['Destination'])
-    parcel = Order(data['OrderNumber'], data['Destination'], data['Price'],  data['Status'], 
-    data['PaymentMode'], data['No_Of_Deliveries'], 
-    data['PaymentMode'], data['quantity'], data['parcelId'], data['date'],data['item'])
-    print(parcel)
-    return jsonify({"message": "successfully added parcel with id"}), 201
+    Date = data.get("date")
+    Pickup_Location = data.get("pickup_location")
+    Destination = data.get("destination")
+    Sender = data.get("sender")
+    Sender_Contact = data.get("sender_contact")
+    Receiver = data.get("receiver")
+    Receiver_Contact = data.get("receiver_contact")
+    Weight = data.get("weight")
+    ParcelId = data.get("parcelId")
+    UserId= data.get("userId")
 
+    order = Order(date=Date,pickup_location=Pickup_Location, destination=Destination,sender=Sender,
+    sender_contact=Sender_Contact,receiver=Receiver,receiver_contact=Receiver_Contact,weight=Weight,parcelId=ParcelId,userId=UserId)
+    controller.add_parcel_delivery_order(order)
 
-# GET specific parcel by id
-@app.route('/api/v1/parcels/<int:parcelId>', methods=["GET"])
-def get_specific_parcelId(parcelId):
-    for parcel in parcel_inventory:
-        if parcel.parcelId ==  parcelId:
-            return jsonify(parcel.parcel())
-
-    return jsonify({"message": "oopsy parcel not found"}), 200
+    return jsonify({"message": "successfully added parcel"}), 201
 
 
 # GET all parcels
 @app.route('/api/v1/parcels', methods=["GET"])
 
 def get__all_parcels():
-    parcel_list = []
-    for parcel in parcel_inventory:
-        parcel_list.append(parcel.parcel())
 
-    return jsonify({"parcel_inventory": parcel_list}), 200
+    parcels=controller.get_parcel_inventory()
+
+
+    return jsonify(parcels),200
+
+
+# GET specific parcel by id
+@app.route('/api/v1/parcels/<int:parcelId>', methods=["GET"])
+def get_specific_parcelId(self,parcelId):
+    parcelId=controller.get_parcel_by_parcelId(self)
+
+    return jsonify(parcelId), 200
+
+
+
 
 # Add users
 @app.route('/api/v1/users', methods=['POST'])
