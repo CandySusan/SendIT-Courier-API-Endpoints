@@ -9,5 +9,8 @@ omit =
     */venv/*
     */models.py
     */test_views.py
+    */controllers.py
+    */validate.py
+    */__init__.py
 
     */home/travis/virtualenv/*
