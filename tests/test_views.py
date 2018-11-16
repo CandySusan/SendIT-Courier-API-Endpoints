@@ -85,7 +85,7 @@ class TestUsers(unittest.TestCase):
         self.client = app.test_client()
         self.hostname = "/api/v1/"
 
-    def user_email_field():
+    def user_email_field(self):
         user = {
             'username': 'susan',
             'email': 'susan.com',

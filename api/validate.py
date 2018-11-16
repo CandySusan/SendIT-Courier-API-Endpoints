@@ -65,7 +65,7 @@ class Validation:
                    "message":"oops password required"
                 }),400
 
-    def validate_userId(userId):
+    def validate_userId(userId,user):
         if type(userId) == int:
                 return({
                 "message": "oops userId should be a list"
