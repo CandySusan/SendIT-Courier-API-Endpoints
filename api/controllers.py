@@ -57,7 +57,7 @@ class User_controller:
           
         }
         
-        user_list.get("users").append(new_user)
+        user_list.append(new_user)
 
         return user_list
     
@@ -67,8 +67,8 @@ class User_controller:
         return  user_list
 
     def get_user_by_userId(self,userId):
-        for user in user_list.get("users"):
-            if user.get("userId") == userId:
+        for user in user_list:
+            if user["userId"] == userId:
                 return user
            
 

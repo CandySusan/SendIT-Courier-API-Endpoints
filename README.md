@@ -1,6 +1,6 @@
 [![Coverage Status](https://coveralls.io/repos/github/CandySusan/SendIT-Courier-API-Endpoints/badge.svg?branch=develop)](https://coveralls.io/github/CandySusan/SendIT-Courier-API-Endpoints?branch=develop)
 [![Build Status](https://travis-ci.org/CandySusan/SendIT-Courier-API-Endpoints.svg?branch=develop)](https://travis-ci.org/CandySusan/SendIT-Courier-API-Endpoints)
-![Maintainability](https://api.codeclimate.com/v1/badges/5e1cc600d8edac9bbfd2/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/8dba3314ebdd6c4aad29/maintainability)]
 
 
 # SendIT Courier API Endpoints
@@ -52,11 +52,12 @@ My app endpoints is hosted on heroku [https://courier-candy.herokuapp.com]
 
 # Create a new parcel
 
-Open postman and perform a POST request on [https://courier-candy.herokuapp.com/api/v1/parcels] Data should be in json format, e.g -
+Open postman and perform a POST request on [https://courier-candy.herokuapp.com/api/v1/parcels] Data should be in json format, e.g 
+
   `{
     "parcels":[{"date":"12/12/18","destination":"bunga","parcelId":2,"pickup_location":"ntinda","receiver":"mwamba","receiver_contact":"075123456","sender":"picky","sender_contact":"0789123456","status":"delivered","userId":3,"weight":"40kg"}]
-    
-    }`   
+    }` 
+      
 Note:
 
 All fields sould be filled for successful creation of a new parcel
