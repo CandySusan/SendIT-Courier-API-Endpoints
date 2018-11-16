@@ -33,6 +33,13 @@ class Controller:
             if parcel.get("parcelId") == parcelId:
                 return parcel
 
+    def cancel_specific_order_by_parcelId(self,parcelId):
+        for parcel in parcel_inventory.get('parcels'): 
+            parcel= parcel.add_parcel_delivery_order()
+            if parcel.get('parcelId') == parcelId: 
+                parcel['status']= "cancelled"
+                return parcel
+
 
 
     def get_parcel_inventory(self):
@@ -66,3 +73,45 @@ class User_controller:
 
     def get_users(self):
         return user_list
+
+
+
+
+# class Delivered(Order):
+# 	def __init__(self, **args):
+# 		super().__init__( deadline,pay_extra)
+# 		self.status = 'Delivered'
+# 		self.pay_extra = pay_extra
+
+# 	def check_status(self):
+# 		return self.status
+
+# 	def change_extra_dime(self, extra_dime):
+# 		self.extra_dime = extra_dime
+
+
+# class In_Transit(Order):
+# 	def __init__(self, **args):
+# 		super().__init__( deadline)
+# 		self.status = 'In_Transit'
+        
+
+# 	def check_status(self):
+# 		return self.status
+
+#         delivered =[]
+
+# def create_delivered(parcelId, deadline, pay_extra=None):
+# 	if pay_extra < 20000:
+# 		raise ValueError('Pay extra is less than 20000')
+# 	if deadline > 24:
+# 		raise ValueError('Parcel not yet delivered')
+# 	order = Delivered(parcelId, deadline, pay_extra)
+# 	delivered.append(order)
+
+
+# def create_in_transit(parcelId, deadline):
+# 	order = In_Transit(parcelId, deadline)
+# 	delivered.append(order)
+
+# 

@@ -16,7 +16,8 @@ To run the project Locally, clone [https://github.com/CandySusan/SendIT-Courier-
 - activate the virtual environment.
 - pip install the requirements.txt.
 - to run the project use python3. the run command is [python run.py].
-- To access and use the application's endpoints on Postman, Use the following URL []
+- To access and use the application's endpoints on Postman, Use the following URL [https://courier-candy.herokuapp.com/]
+
 
 # Application Features
 
@@ -43,6 +44,31 @@ To run the project Locally, clone [https://github.com/CandySusan/SendIT-Courier-
 
 - Install using pip: pip install Flask 
 
+# Deployment
+
+My app endpoints is hosted on heroku [https://courier-candy.herokuapp.com]
+
+# An example on how to Use the endpoints
+
+# Create a new parcel
+
+Open postman and perform a POST request on [https://courier-candy.herokuapp.com/api/v1/parcels] Data should be in json format, e.g -`{
+    "parcels":[{"date":"12/12/18","destination":"bunga","parcelId":2,"pickup_location":"ntinda","receiver":"mwamba","receiver_contact":"075123456","sender":"picky","sender_contact":"0789123456","status":"delivered","userId":3,"weight":"40kg"}]
+    }`   
+Note:
+
+All fields sould be filled for successful creation of a new parcel
+ # Get all available parcels
+
+Perform a GET request on [https://courier-candy.herokuapp.com/api/v1/parcels]
+
+# Get a specific parcel by parcelId 
+Perform a GET request and add parcelId as shown [https://courier-candy.herokuapp.com/api/v1/parcels/2] 
+
+Note:
+
+ParcelId is an integer and not a string so error message will be returned if string is entered instead.
+
 # Import and initialization of my application:
 *********************************************
 
@@ -66,8 +92,8 @@ Install VirtualEnv
 # Acknowledgments
 
 - Used this URL as a guideline to build the api endpoints [http://flask.pocoo.org/]
-- Also used Stackoverflow to guide during building of api endpoints
-- w3schools guided as well
+- Stackoverflow 
+- w3schools
 
 
 # Author
