@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request, Response
 import json
-# import re
+import re
 # import uuid
 from api.models import Order,  parcel_inventory, User, user_list
 from api.controllers import Controller, User_controller
@@ -32,7 +32,7 @@ def login():
         return jsonify({"msg": "Missing username parameter"}), 400
     if not password:
         return jsonify({"msg": "Missing password parameter"}), 400
-   
+    if admin:
         if username != 'candy' or password != 'candy078':
             return jsonify({"msg": "Bad username or password"}), 401
 
@@ -54,7 +54,7 @@ def signup():
     username = request.json.get('username', None)
     email = request.json.get('email', None)
     password = request.json.get('password', None)
-    password_hash = generate_password_hash(password, method='sha256')
+    # password_hash = generate_password_hash(password, method='sha256')
 
     if not username or username.isspace():
         return jsonify({'message': 'Username field can not be empty.'}), 400
@@ -170,8 +170,8 @@ def create_parcel_orders_by_specific_user(userId):
  
 @app.route('/api/v1/users/<int:userId>/parcels', methods=['GET'])
 def get_all_parcel_orders_by_specific_user(userId):
-    for user in parcel_inventory.get("parcels"):
-        if user.get("userId")==userId:
+    for user in parcel_inventory:
+        if user["userId"] == userId:
             return jsonify({"parcels":parcel_inventory}),200
         return jsonify({"message":"User not found"})
 
