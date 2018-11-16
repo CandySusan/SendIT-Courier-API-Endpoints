@@ -53,7 +53,7 @@ My app endpoints is hosted on heroku [https://courier-candy.herokuapp.com]
 # Create a new parcel
 
 Open postman and perform a POST request on [https://courier-candy.herokuapp.com/api/v1/parcels] Data should be in json format, e.g -
-`{
+  `{
     "parcels":[{"date":"12/12/18","destination":"bunga","parcelId":2,"pickup_location":"ntinda","receiver":"mwamba","receiver_contact":"075123456","sender":"picky","sender_contact":"0789123456","status":"delivered","userId":3,"weight":"40kg"}]
     
     }`   
