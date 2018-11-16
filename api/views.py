@@ -1,6 +1,12 @@
 from flask import Flask, jsonify, request, Response
 import json
-  
+# import sys 
+# sys.setdefaultencoding('UTF8')
+
+# import os
+# os.putenv('LANG', 'en_US.UTF-8')
+# os.putenv('LC_ALL', 'en_US.UTF-8')
+
 from api.models import Order,  parcel_inventory, User, user_list
 from api.controllers import Controller, User_controller
 # from flask_jwt_extended import(JWTManager,jwt_required,create_access_token,get_jwt_identity)
@@ -66,7 +72,9 @@ def create_parcel_delivery_order():
     sender_contact=Sender_Contact,receiver=Receiver,receiver_contact=Receiver_Contact,weight=Weight,
     parcelId=ParcelId,userId=UserId,status=status)
     controller.add_parcel_delivery_order(order)
-    return jsonify({"message": "successfully added parcel"}), 201
+    return jsonify({"message": "successfully added parcel",
+
+    }), 201
 
 
 # GET all parcels
@@ -115,26 +123,26 @@ def get_user_with_specific_userId(userId):
  
 @app.route('/api/v1/users/<int:userId>/parcels', methods=['POST'])
 def create_parcel_orders_by_specific_user(userId):
-    request_data = request.get_json()
+    order = request.get_json()
     for user in parcel_inventory.get("parcels"):
         if user.get("userId") == userId:
            new_parcel={
-            "date":request_data.date,
-            "pickup_location":request_data.pickup_location,
-            "destination":request_data.destination,
-            "sender":request_data.sender,
-            "sender_contact":request_data.sender_contact,
-            "receiver":request_data.receiver,
-            "receiver_contact":request_data.receiver_contact,
-            "weight":request_data.weight,~
-            "parcelId":request_data.parcelId,
-            "userId":request_data.userId,
-            "status":request_data.status
+            "date":order.date,
+            "pickup_location":order.pickup_location,
+            "destination":order.destination,
+            "sender":order.sender,
+            "sender_contact":order.sender_contact,
+            "receiver":order.receiver,
+            "receiver_contact":order.receiver_contact,
+            "weight":order.weight,
+            "parcelId":order.parcelId,
+            "userId":order.userId,
+            "status":order.status
            }
 
            user.get('parcels').append(new_parcel)
            return jsonify(new_parcel),201
-    return jsonify({"message": "user not found"}),201
+    return jsonify({"message": "user not found"}),400
 
 
  
@@ -142,5 +150,12 @@ def create_parcel_orders_by_specific_user(userId):
 def get_all_parcel_orders_by_specific_user(userId):
     for user in parcel_inventory.get("parcels"):
         if user.get("userId")==userId:
-            return jsonify({"parcels":[]})
+            return jsonify({"parcels":[]}),200
         return jsonify({"message":"User not found"})
+
+@app.route('/api/v1/parcels/<int:parcelId>/cancel', methods=['PUT'])
+def cancel_specific_order(parcelId):
+    parcel=controller.cancel_specific_order_by_parcelId
+    return jsonify(parcel),200
+
+
