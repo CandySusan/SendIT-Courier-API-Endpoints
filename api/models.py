@@ -1,8 +1,8 @@
 
 import random
 
-parcel_inventory = {"parcels":[]}
-user_list = {"users":[]}
+parcel_inventory = []
+user_list = []
 
 
 
@@ -21,8 +21,8 @@ class Order():
         self.userId = args.get("userId")
         self.status = args.get("status")
 class User:
-    def __init__(self, userId, username, password, email):
-        self.userId = userId
+    def __init__(self, username, password, email):
+        
         self.username = username
         self.email = email
         self.password = password    

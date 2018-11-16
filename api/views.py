@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request, Response
 import json
-import re
-import uuid
+# import re
+# import uuid
 from api.models import Order,  parcel_inventory, User, user_list
 from api.controllers import Controller, User_controller
 from flask_jwt_extended import(JWTManager,jwt_required,create_access_token,get_jwt_identity)
@@ -22,6 +22,7 @@ def Welcome():
 
 @app.route('/api/v1/auth/login',methods = ["POST"])
 def login():
+
     if not request.is_json:
         return jsonify({"msg": "Missing JSON in request"}), 400
 
@@ -31,9 +32,9 @@ def login():
         return jsonify({"msg": "Missing username parameter"}), 400
     if not password:
         return jsonify({"msg": "Missing password parameter"}), 400
-
-    if username != 'candy' or password != 'test':
-        return jsonify({"msg": "Bad username or password"}), 401
+   
+        if username != 'candy' or password != 'candy078':
+            return jsonify({"msg": "Bad username or password"}), 401
 
     access_token = create_access_token(identity=username)
     return jsonify(access_token=access_token), 200
@@ -77,17 +78,17 @@ def signup():
 @jwt_required
 def create_parcel_delivery_order():
     data = request.get_json()
-    Date = data.get("date")
-    Pickup_Location = data.get("pickup_location")
-    Destination = data.get("destination")
-    Sender = data.get("sender")
-    Sender_Contact = data.get("sender_contact")
-    Receiver = data.get("receiver")
-    Receiver_Contact = data.get("receiver_contact")
-    Weight = data.get("weight")
-    ParcelId = data.get("parcelId")
-    UserId= data.get("userId")
-    status =data.get("status")
+    Date = data["date"]
+    Pickup_Location = data["pickup_location"]
+    Destination = data["destination"]
+    Sender = data["sender"]
+    Sender_Contact = data["sender_contact"]
+    Receiver = data["receiver"]
+    Receiver_Contact = data["receiver_contact"]
+    Weight = data["weight"]
+    ParcelId = data["parcelId"]
+    UserId= data["userId"]
+    status =data["status"]
     order = Order(date=Date,pickup_location=Pickup_Location, destination=Destination,sender=Sender,
     sender_contact=Sender_Contact,receiver=Receiver,receiver_contact=Receiver_Contact,weight=Weight,
     parcelId=ParcelId,userId=UserId,status=status)
@@ -119,11 +120,11 @@ def get_specific_parcelId(parcelId):
 @app.route('/api/v1/users', methods=['POST'])
 def add_user():
     data = request.get_json()
-    userId = data.get("userId")
-    username = data.get("username")
-    email = data.get("email")
-    password = data.get("password")
-    user = User(username=username,email=email,password=password,userId=userId)
+    
+    username = data["username"]
+    email = data["email"]
+    password = data["password"]
+    user = User(username=username,email=email,password=password)
     users = user_controller.add_user(user)
     return jsonify({
             "message":"User added successfully",
@@ -171,13 +172,14 @@ def create_parcel_orders_by_specific_user(userId):
 def get_all_parcel_orders_by_specific_user(userId):
     for user in parcel_inventory.get("parcels"):
         if user.get("userId")==userId:
-            return jsonify({"parcels":[]}),200
+            return jsonify({"parcels":parcel_inventory}),200
         return jsonify({"message":"User not found"})
 
 @app.route('/api/v1/parcels/<int:parcelId>/cancel', methods=['PUT'])
 def cancel_specific_order(parcelId):
     parcel=controller.cancel_specific_order_by_parcelId
     return jsonify(parcel),200
+
 
 
 @app.errorhandler(404)

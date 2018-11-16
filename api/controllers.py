@@ -5,6 +5,7 @@ from api.models import user_list
 class Controller:
 
     def add_parcel_delivery_order(self, order):
+        """this function adds a parcel to the parcel_inventory"""
         parcel = {
             "date":order.date,
             "pickup_location":order.pickup_location,
@@ -19,37 +20,37 @@ class Controller:
             "status":order.status
         }
         
-        parcel_inventory.get("parcels").append(parcel)
-
+        parcel_inventory.append(parcel)
         return parcel_inventory
     
     def delete_parcel_delivery_order(self,parcelId):
+        """This method removes the parcel order from a list using the parcelId"""
         parcel_inventory.remove(parcelId)
 
         return  parcel_inventory
 
     def get_parcel_by_parcelId(self,parcelId):
-        for parcel in parcel_inventory.get("parcels"):
-            if parcel.get("parcelId") == parcelId:
+        """this method gets a parcel using the parcelId"""
+        for parcel in parcel_inventory:
+            if parcel["parcelId"] == parcelId:
                 return parcel
 
     def cancel_specific_order_by_parcelId(self,parcelId):
-        for parcel in parcel_inventory.get('parcels'): 
-            parcel= parcel.add_parcel_delivery_order()
-            if parcel.get('parcelId') == parcelId: 
-                parcel['status']= "cancelled"
-                return parcel
-
+        """this method cancels a specific order made by a  specific user"""
+        request = request.get_json()
+        parcel2 =[parcel for parcel in parcel_inventory.get("parcels") if parcel['parcelId'] == parcelId]
+        parcel2[0]['status']= request["status"]
+        return parcel2[0]
 
 
     def get_parcel_inventory(self):
+        """this method returns the parcel_inventory"""
         return parcel_inventory
 
 class User_controller:
-
     def add_user(self, user):
         new_user = {
-            "userId":user.userId,
+            "userId":len(user_list)+1,
             "username":user.username,
             "email":user.email,
             "password":user.password,
