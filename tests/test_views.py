@@ -28,6 +28,17 @@ class TestApi(unittest.TestCase):
         }
 
     def test_post_a_parcel(self):
+        user = {
+            'username': 'candy',
+            'password': 'test'
+        }
+        response = self.client.post(
+            'api/v1/auth/login',
+            content_type='application/json',
+            data=json.dumps(user)
+        )
+        access_token = json.loads(response.data.decode())
+        self.assertEqual(response.status_code, 200)
         response = self.client.post(
             self.hostname+'parcels',
             content_type='application/json',
@@ -40,17 +51,25 @@ class TestApi(unittest.TestCase):
 
     def test_invalid_url(self):
         response = self.client.get(self.hostname)
-        self.assertEqual(response.status_code, 404)
-
-    def test_get_all_parcels(self):
-        response = self.client.get(self.hostname + 'parcels')
-        self.assertEqual(response.content_type, 'application/json')
         self.assertEqual(response.status_code, 200)
 
-    # def test_get_specific_parcel_by_parcelId(self):
-    #     result = self.client.get(
-    #         self.hostname + 'parcels'+ self.parcels.get("parcelId"))
-    #     self.assertEqual(result.status_code, 200)
+    def test_get_all_parcels(self):
+            user = {
+            'username': 'candy',
+            'password': 'test1234'
+        }
+            response = self.client.post(
+            'api/v1/auth/login',
+            content_type='application/json',
+            data=json.dumps(user)
+        )
+            access_token = json.loads(response.data.decode())
+            self.assertEqual(response.status_code, 200)
+            response = self.client.get(self.hostname + 'parcels')
+            self.assertEqual(response.content_type, 'application/json')
+            self.assertEqual(response.status_code, 200)
+
+  
 
     def test_to_cancel_specific_parcel_delivery_order(self):
         response = self.client.put(self.hostname + 'parcels/1')
@@ -61,8 +80,22 @@ class TestApi(unittest.TestCase):
 
         self.assertEqual(response.status_code, 200)
 
-    # def test_create_order_with_empty_destination(self):
-    #     request = request.get_json()
-    #     with self.assertRaises(ValueError):
-    #         self.parcels(request['destination'] == ""
-    #         orde
+class TestUsers(unittest.TestCase):
+    def setUp(self):
+        self.client = app.test_client()
+        self.hostname = "/api/v1/"
+
+    def user_email_field(self):
+        user = {
+            'username': 'susan',
+            'email': 'susan.com',
+            'password': '12345678'
+        }
+        response = self.client.post(
+            'api/v1/auth/signup',
+            content_type='application/json',
+            data=json.dumps(user)
+        )
+        self.assertEqual(response.status_code,200)
+
+       
